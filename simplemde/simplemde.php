@@ -24,14 +24,17 @@ class SimplemdeField extends TextField {
     
     $input->removeAttr('value');
     $input->html($this->value() ? htmlentities($this->value(), ENT_NOQUOTES, 'UTF-8') : false);
-    
+  
     if (isset($this->buttons)) {
-      if ($this->buttons == false) {
-        $input->data('buttons', "no");
-      }
-      else {
+      if (is_array($this->buttons)) {
         $input->data('buttons', $this->buttons);
       }
+      else {
+        $input->data('buttons', "no");
+      }
+    }
+    else {
+      $input->data('buttons', c::get('simplemde.buttons', false));
     }
 
     return $input;
