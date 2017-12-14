@@ -296,16 +296,30 @@
                   
       // Keep changes
       simplemde.codemirror.on("change", function() {
+        
+        // Validation
+        var counter = field.find(".field-counter");
+        var textarea  = counter.parent('.field').find('.input');
+        var length    = $.trim(textarea.val()).length;
+        var max       = textarea.data('max');
+        var min       = textarea.data('min');
+        length = $.trim(textarea.val()).length;
+        counter.text(length + (max ? '/' + max : ''));
+        if((max && length > max) || (min && length < min)) {
+          counter.addClass('outside-range');
+        } else {
+          counter.removeClass('outside-range');
+        }
+        
       	field.closest('form').trigger('keep');
+        
       });
       
       // Check for tabs plugin
       if ($(".tab-placeholder").length || $(".tab-container").length) {
         field.addClass("tabs-helper");
       }
-      
-      simplemde.codemirror.setOption("readonly", "true");
-      
+            
       field.data('editor', true);
             
     });
