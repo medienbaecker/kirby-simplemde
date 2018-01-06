@@ -315,6 +315,10 @@
         
       });
       
+      setTimeout(function() {
+        simplemde.codemirror.refresh();
+      }, 200);
+      
       // Check for tabs plugin
       if ($(".tab-placeholder").length || $(".tab-container").length) {
         field.addClass("tabs-helper");

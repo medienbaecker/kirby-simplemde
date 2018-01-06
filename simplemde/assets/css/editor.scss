@@ -159,6 +159,7 @@
   .CodeMirror {
     border-radius: 0;
     border: none;
+    line-height: 1.5;
     &, .CodeMirror-scroll {
       min-height: 130px;
     }
