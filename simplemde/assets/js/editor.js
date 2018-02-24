@@ -24,7 +24,7 @@
     	$.ajax({
     	  url: translationUrl,
     	  dataType: 'json',
-    	  success: function(translation, simplemde = simplemde) {
+    	  success: function(translation) {
     	    // Buttons
     	    $(".field-with-simplemde").find(".editor-toolbar-inner a").each(function() {
     	    	var title = $(this).attr("title").replace(/[{}]/g, "");
