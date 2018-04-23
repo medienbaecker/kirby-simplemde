@@ -15,9 +15,14 @@ return [
   'button.link'            => 'Link',
   'button.page'            => 'Seite',
   'button.email'           => 'E-Mail',
+  'button.image'           => 'Bild',
   
   // Pagelink
   'pagelink.placeholder'   => 'Nach Seite suchen',
-  'pagelink.no-results'   => 'Keine Seiten gefunden',
+  'pagelink.no-results'    => 'Keine Seiten gefunden',
+
+  // Image
+  'image.placeholder'      => 'Nach Bild suchen',
+  'image.no-results'       => 'Keine Bilder gefunden',
   
 ];

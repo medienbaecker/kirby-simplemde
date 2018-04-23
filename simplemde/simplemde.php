@@ -20,7 +20,9 @@ class SimplemdeField extends TextField {
     $input->tag('textarea');
     $input->data('field', 'simplemde');
     
-    $input->data('json', preg_split( '/(\/options|\/pages)/', purl($this->model) )[0] . "/plugins/simplemde" );
+    $input->data('json', preg_split( '/(\/options|\/pages)/', purl($this->model) )[0] . "/simplemde" );
+
+    $input->data('page', preg_split( '/(\/edit)/', purl($this->model) )[0]);
     
     $input->removeAttr('value');
     $input->html($this->value() ? htmlentities($this->value(), ENT_NOQUOTES, 'UTF-8') : false);

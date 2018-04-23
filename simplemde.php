@@ -15,7 +15,7 @@
   
   panel()->routes[] = array(
     'pattern' => array(
-      '(:any)/simplemde/index.json',
+      'simplemde/index.json',
     ),
     'action'  => function() {
       $search = site()->search(get("phrase"), array(
@@ -32,7 +32,7 @@
   
   panel()->routes[] = array(
     'pattern' => array(
-      '(:any)/simplemde/translation.json',
+      'simplemde/translation.json',
     ),
     'action'  => function() {
       if (version_compare(panel()->version(), '2.2', '>=')) {
@@ -49,6 +49,24 @@
       }
       
       return json_encode($translation, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    },
+    'filter'  => 'auth',
+    'method'  => 'POST|GET'
+  );
+
+  panel()->routes[] = array(
+    'pattern' => array(
+      'pages/(:any)/files.json',
+      'options/files.json',
+    ),
+    'action'  => function($uid = null) {
+      if($uid == null) {
+        $files = site()->files()->toArray();
+      }
+      else {
+        $files = page($uid)->files()->toArray();
+      }
+      return json_encode($files, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     },
     'filter'  => 'auth',
     'method'  => 'POST|GET'

@@ -14,7 +14,8 @@
     	    	
     	var field = simplemde.closest(".field");
     	var indexUrl = simplemde.data("json") + '/index.json';
-    	var translationUrl = simplemde.data("json") + '/translation.json';
+			var translationUrl = simplemde.data("json") + '/translation.json';
+			var filesUrl = simplemde.data("page") + '/files.json';
     	
     	if(field.data('editor')) {
     	  return $(this);
@@ -34,7 +35,10 @@
     	    });
     	    // Pagelink
     	    $(".field-with-simplemde").find(".editor-toolbar").data("pagelink-placeholder", translation["pagelink.placeholder"] + "...");
-    	    $(".field-with-simplemde").find(".editor-toolbar").data("no-results", translation["pagelink.no-results"]);
+					$(".field-with-simplemde").find(".editor-toolbar").data("pagelink-no-results", translation["pagelink.no-results"]);
+					
+					$(".field-with-simplemde").find(".editor-toolbar").data("image-placeholder", translation["image.placeholder"] + "...");
+    	    $(".field-with-simplemde").find(".editor-toolbar").data("image-no-results", translation["image.no-results"]);
     	  }
     	});
     	
@@ -47,7 +51,8 @@
     	  "ordered-list",
     	  "link",
     	  "pagelink",
-    	  "email"
+				"email",
+				"image"
     	];
     	
     	if (simplemde.data("buttons")) {
@@ -152,13 +157,13 @@
     		{
     			name: "pagelink",
     			action: function pagelinkFunction() {    				
-    				field.find(".editor-toolbar").toggleClass("pagelink-open");
-    				if (field.find(".pagesearch").length) {
-    				  field.find(".pagesearch").remove();
+    				field.find(".editor-toolbar").toggleClass("search-open");
+    				if (field.find(".easy-autocomplete").length) {
+    				  field.find(".easy-autocomplete").remove();
     				  return;
     				}
     				else {
-    				  var input = $('<input type="text" class="pagesearch" placeholder="' + field.find(".editor-toolbar").data("pagelink-placeholder") + '">');
+    				  var input = $('<input type="text" class="search" placeholder="' + field.find(".editor-toolbar").data("pagelink-placeholder") + '">');
     				  field.find(".editor-toolbar").append(input);
     				}
     				    				
@@ -171,7 +176,7 @@
 				        type: "custom",
 				        method: function(value, item) {
 				          return '<span class="title">' + value + '</span>' + 
-				          '<span class="uri"> (' + item.uri + ')</span>';
+				          '<span class="subtitle"> (' + item.uri + ')</span>';
 				        }
           		},
     					list: {
@@ -192,13 +197,13 @@
     							var cursorPos = cm.getCursor();
     							cm.focus();
     							
-    							field.find(".editor-toolbar").removeClass("pagelink-open");
+    							field.find(".editor-toolbar").removeClass("search-open");
     							field.find(".editor-toolbar .easy-autocomplete").remove();
 								},
 								onHideListEvent: function() {
 									var containerList = field.find(".easy-autocomplete-container ul");
 									if ($(containerList).children('li').length <= 0) {
-									  $(containerList).html('<li class="no-results">' + field.find(".editor-toolbar").data("no-results") + '</li>').show();
+									  $(containerList).html('<li class="no-results">' + field.find(".editor-toolbar").data("pagelink-no-results") + '</li>').show();
 									}
 								}
     					}
@@ -209,8 +214,8 @@
             
             input.on('keyup',function(evt) {
               if (evt.keyCode == 27) {
-                field.find(".editor-toolbar").removeClass("pagelink-open");
-                field.find(".pagesearch").remove();
+                field.find(".editor-toolbar").removeClass("search-open");
+                field.find(".editor-toolbar .easy-autocomplete").remove();
                 simplemde.codemirror.focus();
               }
             });
@@ -250,7 +255,72 @@
     			},
     			className: "fa fa-envelope",
     			title: "{{button.email}}",
-    		}
+				},
+				{
+    			name: "image",
+    			action: function imageFunction() {    				
+    				
+						field.find(".editor-toolbar").toggleClass("search-open image-open");
+    				if (field.find(".easy-autocomplete").length) {
+    				  field.find(".easy-autocomplete").remove();
+    				  return;
+    				}
+    				else {
+    				  var input = $('<input type="text" class="search" placeholder="' + field.find(".editor-toolbar").data("image-placeholder") + '">');
+    				  field.find(".editor-toolbar").append(input);
+    				}
+    				    				
+    				var index = {
+    					url: function(phrase) {
+  							return filesUrl;
+  						},
+    					getValue: "filename",
+          		template: {
+				        type: "custom",
+				        method: function(value, item) {
+				          return '<span class="title">' + value + '</span>' + 
+				          '<span class="subtitle"> (' + item.niceSize + ')</span>';
+				        }
+          		},
+    					list: {
+    						maxNumberOfElements: 100,
+    						onChooseEvent: function() {
+    							var filename = input.getSelectedItemData().filename;
+    							
+    							var cm = simplemde.codemirror;
+    							var selection = cm.getSelection();
+    							var replacement = '(image: ' + filename + ')';
+    							cm.replaceSelection(replacement);
+    							var cursorPos = cm.getCursor();
+    							cm.focus();
+    							
+    							field.find(".editor-toolbar").removeClass("search-open image-open");
+    							field.find(".editor-toolbar .easy-autocomplete").remove();
+								},
+								onHideListEvent: function() {
+									var containerList = field.find(".easy-autocomplete-container ul");
+									if ($(containerList).children('li').length <= 0) {
+									  $(containerList).html('<li class="no-results">' + field.find(".editor-toolbar").data("image-no-results") + '</li>').show();
+									}
+								}
+    					}
+    				};
+    				input.easyAutocomplete(index);
+                        
+            input.focus();
+            
+            input.on('keyup',function(evt) {
+              if (evt.keyCode == 27) {
+                field.find(".editor-toolbar").removeClass("search-open image-open");
+                field.find(".editor-toolbar .easy-autocomplete").remove();
+                simplemde.codemirror.focus();
+              }
+            });
+
+    			},
+    			className: "fa fa-image",
+    			title: "{{button.image}}",
+    		},
     	];
 
     	toolbarItems = toolbarItems.filter(function(item) {

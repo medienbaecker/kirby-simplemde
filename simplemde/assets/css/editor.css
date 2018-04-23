@@ -48,14 +48,14 @@
     .field-with-simplemde .editor-toolbar a.fa-header-1:after, .field-with-simplemde .editor-toolbar a.fa-header-2:after, .field-with-simplemde .editor-toolbar a.fa-header-3:after {
       font-size: 13px;
       top: 1px; }
-  .field-with-simplemde .editor-toolbar input.pagesearch {
+  .field-with-simplemde .editor-toolbar input.search {
     height: 45px;
     width: 100%;
     border: none;
     font: inherit;
     box-sizing: border-box;
     padding: 10px 14px; }
-    .field-with-simplemde .editor-toolbar input.pagesearch:focus {
+    .field-with-simplemde .editor-toolbar input.search:focus {
       outline: none; }
   .field-with-simplemde .editor-toolbar .easy-autocomplete-container {
     position: absolute;
@@ -88,22 +88,34 @@
           padding: 6px 14px; }
         .field-with-simplemde .editor-toolbar .easy-autocomplete-container ul li .title {
           display: block; }
-        .field-with-simplemde .editor-toolbar .easy-autocomplete-container ul li .uri {
+        .field-with-simplemde .editor-toolbar .easy-autocomplete-container ul li .subtitle {
           display: block;
           color: #777;
           font-size: 12px;
           padding-top: 4px; }
-  .field-with-simplemde .editor-toolbar.pagelink-open .editor-toolbar-inner {
+  .field-with-simplemde .editor-toolbar.search-open .editor-toolbar-inner {
     overflow: visible; }
-  .field-with-simplemde .editor-toolbar.pagelink-open a {
+  .field-with-simplemde .editor-toolbar.search-open a {
     display: none; }
-    .field-with-simplemde .editor-toolbar.pagelink-open a.fa-file {
+    .field-with-simplemde .editor-toolbar.search-open a.fa-file {
       display: block;
       position: absolute;
       right: 0;
       z-index: 2;
       border-left: 1px dashed #ddd; }
-      .field-with-simplemde .editor-toolbar.pagelink-open a.fa-file:before {
+      .field-with-simplemde .editor-toolbar.search-open a.fa-file:before {
+        color: black; }
+  .field-with-simplemde .editor-toolbar.search-open.image-open a {
+    display: none; }
+    .field-with-simplemde .editor-toolbar.search-open.image-open a.fa-file {
+      display: none; }
+    .field-with-simplemde .editor-toolbar.search-open.image-open a.fa-image {
+      display: block;
+      position: absolute;
+      right: 0;
+      z-index: 2;
+      border-left: 1px dashed #ddd; }
+      .field-with-simplemde .editor-toolbar.search-open.image-open a.fa-image:before {
         color: black; }
 
 .field-with-simplemde.tabs-helper .editor-toolbar {
