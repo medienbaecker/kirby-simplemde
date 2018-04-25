@@ -28,6 +28,12 @@ Compared to the built-in textarea, this field has some advantages:
 - Easy to add custom buttons
 - Sticky toolbar on the top for better reachability
 
+## Pricing
+
+This plugin is free to use. If you use it in a commercial project, I'd appreciate a small donation. 
+
+<a href="https://www.buymeacoffee.com/medienbaecker" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a> 
+
 ## Options
 
 ### Buttons
