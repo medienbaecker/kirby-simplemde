@@ -104,4 +104,4 @@ You can replace the core textarea with this setting in your `config.php`:
 c::set('simplemde.replaceTextarea', true);
 ```
 
-Please keep in mind, that the structure field will remove the `link` and `email` buttons if you don't [define a button list](#buttons).
+Please keep in mind that the structure field will remove the `link` and `email` buttons if you don't [define a button list](#buttons) when replacing the core textarea.
