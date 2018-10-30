@@ -13,9 +13,9 @@
     	}
     	    	
     	var field = simplemde.closest(".field");
-    	var indexUrl = simplemde.data("json") + '/index.json';
-    	var translationUrl = simplemde.data("json") + '/translation.json';
     	
+    	var searchUrl = simplemde.data("json") + '/search';
+    	var translationUrl = simplemde.data("json") + '/translation';
     	if(field.data('editor')) {
     	  return $(this);
     	}
@@ -164,7 +164,7 @@
     				    				
     				var index = {
     					url: function(phrase) {
-  							return indexUrl + "?phrase=" + phrase;
+  							return searchUrl + "?phrase=" + phrase;
   						},
     					getValue: "title",
           		template: {

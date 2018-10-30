@@ -15,7 +15,7 @@
   
   panel()->routes[] = array(
     'pattern' => array(
-      '(:any)/simplemde/index.json',
+      '(:any)/simplemde/search',
     ),
     'action'  => function() {
       $search = site()->search(get("phrase"), array(
@@ -32,7 +32,7 @@
   
   panel()->routes[] = array(
     'pattern' => array(
-      '(:any)/simplemde/translation.json',
+      '(:any)/simplemde/translation',
     ),
     'action'  => function() {
       if (version_compare(panel()->version(), '2.2', '>=')) {
