@@ -1,4 +1,6 @@
-# SimpleMDE for Kirby <a href="https://www.paypal.me/medienbaecker"><img width="99" src="http://www.medienbaecker.com/beer.png" alt="Buy me a beer" align="right"></a>
+This plugin for Kirby 2 is no longer maintained.
+
+# SimpleMDE for Kirby
 
 This is a textarea with Markdown highlighting using [SimpleMDE](https://github.com/sparksuite/simplemde-markdown-editor).
 
